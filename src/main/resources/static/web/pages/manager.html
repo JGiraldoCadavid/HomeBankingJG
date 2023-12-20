@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Home Banking</title>
+</head>
+<body>
+    <div class="container-fluid" id="app">
+        <div class="row">
+            <div class="d-flex flex-column col-6">
+                <div>
+                    <form>
+                        <div class="mb-3">
+                            <h2 class="text-center">Client Manager</h2>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name: </label>
+                            <input type="text" class="form-control" id="name" placeholder="Jon" v-model="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name: </label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Giraldo" v-model="lastName">
+                        </div>
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Email address</label>
+                          <input type="email" class="form-control" id="email" placeholder="jonagira@gmail.com" v-model="email">
+                        </div>
+                        <button type="submit" class="btn btn-primary" @click.prevent="addClient">Add client</button>
+                      </form>
+                      <div><h2 class="text-danger text-center mt-2">{{campoVacio}}</h2></div>
+                </div>
+                <div class="mt-4">
+                    <h1 class="text-center">Client List</h1>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email Adress</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-if="dataClients._embedded.clients.length>0" v-for="client of dataClients._embedded.clients">
+                            <td>{{client.name}}</td>
+                            <td>{{client.lastName}}</td>
+                            <td>{{client.email}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+            <div class="col-6">
+                <h1>Client REST Response</h1>
+                <div>
+                    <pre>{{ JSON.stringify(dataClients._embedded.clients, null, 2) }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="shortcut icon" href="../images/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/style.css">
+  <title>Pay Loan</title>
+</head>
+  <body>
+    <div class="layout" id="app">
+      <main class="flex-grow-1 img-transfer bg-inside" v-cloak>
+        <div class="container mb-3 mt-3 register-form-transfer">
+          <h1 class="text-center mt-4">Pay</h1>
+          <form class="m-3">
+             <div class="form-group">
+                <label for="loansToPay" class="mb-2 fw-medium">Select the loan to pay:</label>
+                <select class="form-control" id="loansToPay" name="loansToPay" v-model="clientLoanId" @change="amountSelectedLoan">
+                  <option value="null" selected>Select loan</option>
+                  <option v-if="loanToPay && loanToPay.length>0" v-for="loan in loanToPay" :value="loan.id">{{loan.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="amount" class="mb-2 fw-medium">Amount:</label>
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <span class="input-group-text fw-medium">$</span>
+                  </div>
+                  <input type="number" class="form-control" id="amount" name="amount" v-model="amount" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="payments" class="mb-2 fw-medium text-light">Payments:</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="payments" name="payments" v-model="payments" readonly>
+                </div>
+              </div>
+            <div class="form-group">
+                <label for="accountNumberSource" class="mb-2 fw-medium text-light">Select the source account:</label>
+                <select class="form-control" id="accountNumberSource" name="accountNumberSource" v-model="selectedOriginAccount">
+                  <option value="" selected>Select account (balance)</option>
+                  <option v-for="account in accounts" :value="account.number">{{account.number}} ($ {{account.balance.toLocaleString('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2})}})</option>
+                </select>
+              </div>
+            <button type="button" class="btn-12 mt-3" @click.prevent="payLoan"><span>Pay Loan</span></button>
+            <button type="button" class="btn-12 mt-3" @click="returnAccounts"><span>Return to Accounts</span></button>
+          </form>
+        </div>
+      </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../scripts/pay-loan.js"></script>
+</body>
+</html>
