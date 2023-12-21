@@ -20,8 +20,8 @@ public class HomeBankingApplication {
 		SpringApplication.run(HomeBankingApplication.class, args);
 	}
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	//@Autowired
+	//private PasswordEncoder passwordEncoder;
 
 	@Bean
 	public CommandLineRunner initData(
@@ -33,7 +33,7 @@ public class HomeBankingApplication {
 			CardRepository cardRepository
 	){
 		return args -> {
-			Client melba= new Client("Melba", "Morel", "melba@mindhub.com",
+			/*Client melba= new Client("Melba", "Morel", "melba@mindhub.com",
 					passwordEncoder.encode("Melba1234"));
 			Client jon= new Client("Jonathan", "Giraldo","jonagira@gmail.com",
 					passwordEncoder.encode("Jon1234"));
@@ -210,7 +210,7 @@ public class HomeBankingApplication {
 					CardColor.SILVER, "4673-8976-2342-7423","545",LocalDate.now().minusMonths(8),
 					LocalDate.now().plusYears(4), true);
 			jon.addCard(card1Jon);
-			cardRepository.save(card1Jon);
+			cardRepository.save(card1Jon);*/
 		};
 	}
 

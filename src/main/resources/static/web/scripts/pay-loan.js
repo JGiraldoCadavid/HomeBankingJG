@@ -132,7 +132,9 @@ const { createApp } = Vue
             })
             accountToUpdate.balance -= parseFloat(this.amount);
             console.log(accountToUpdate);
-
+            setTimeout(function() {
+                location.reload();
+            }, 3000);
             this.clientLoanId = null;
             this.selectedOriginAccount = "";
             this.amount = 0;
