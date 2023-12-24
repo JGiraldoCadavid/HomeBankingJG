@@ -21,6 +21,8 @@ de otras personas dentro del mismo banco.</p>
 * `Funcionalidad 5:` <p align="justify">"***Crear y eliminar tarjetas (crédito o debito)*** - los usuarios tienen el control total sobre la gestión de sus tarjetas, con la capacidad de crear y
 eliminar tarjetas de débito y crédito según sus necesidades. Cada tarjeta es fácilmente accesible, presentando de manera clara todos los datos esenciales necesarios para realizar compras en línea.
 La plataforma permite a los usuarios mantener hasta tres tarjetas de cada tipo (débito o crédito) y limita la posesión a una única tarjeta de cada tipo de color, como titanium, gold o silver.</p>
+* `Funcionalidad 6:` <p align="justify">"***Pago externo con datáfono*** - los usuarios pueden realizar pagos simulados a través de un frontend externo ([PayHomeBanking](https://github.com/JGiraldoCadavid/PayHomeBanking)), esto se lleva a cabo mediante la validación de datos del home banking. En este escenario simulado, se verifica la autenticidad de la información
+del usuario en el sistema de home banking, y posteriormente se procede a realizar una transacción simulada que implica la retirada de fondos desde una de sus cuentas.
 
 ## Administrador
 * `Funcionalidad 1:` <p align="justify">***Crear nuevos prestamos*** - la aplicación brinda al administrador la capacidad de crear nuevos tipos de préstamos además de los tres predeterminados
@@ -31,9 +33,7 @@ máximo del préstamo.</p>
 <p align="justify">Para obtener el proyecto, descárgalo en formato .zip (este proyecto utilizó Java 17 y Gradle 8.5). Descomprime el archivo descargado y ábrelo con tu IDE preferido, como IntelliJ.</p> 
 
   <p align="justify">Antes de ejecutar el proyecto, verifica que PostgreSQL esté instalado y configura las credenciales en el pgAdmin, estas credenciales se encuentran en el archivo application.properties del proyecto.
-    Además, la primera vez que lo ejecutes descomenta todo lo que hay comentado en HomeBankingApplication, luego de que haya corrido una vez vuelve a comentarlo (si no deseas usar PostgreSQL, descomenta 
-    las líneas que se encuentran comentadas y comenta las que no lo están en el archivo application.properties, esto permite usar H2 como base de datos. También debes descomentar la linea comentada en el build.gradle y comenta la de PostgreSQL.
-    Finalmente descomenta lo comentado en HomeBankingApplication y luego de correr nuevamente el proyecto abre localhost:8081/h2-console y podrás ver y usar la base de datos).</p>
+    Además, la primera vez que lo ejecutes descomenta todo lo que hay comentado en HomeBankingApplication, luego de que haya corrido una vez vuelve a comentarlo.</p>
   <p align="justify">Inicia el proyecto, que se ejecutará en el puerto 8081. Ahora puedes realizar pruebas registrando tanto usuarios como administradores. Para crear un usuario, utiliza cualquier dirección de correo 
 electrónico que tenga "@ejemplo.com". Para el administrador, asegúrate de que la dirección de correo electrónico termine en "@admin.com". ¡Listo! Ahora puedes explorar y probar las funcionalidades del proyecto.</p>
 
