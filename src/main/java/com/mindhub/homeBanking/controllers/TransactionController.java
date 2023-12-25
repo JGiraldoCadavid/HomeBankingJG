@@ -1,24 +1,25 @@
 package com.mindhub.homeBanking.controllers;
 
+import com.lowagie.text.DocumentException;
 import com.mindhub.homeBanking.dtos.AccountDTO;
-import com.mindhub.homeBanking.models.Account;
-import com.mindhub.homeBanking.models.Client;
-import com.mindhub.homeBanking.models.Transaction;
-import com.mindhub.homeBanking.models.TransactionType;
+import com.mindhub.homeBanking.models.*;
 import com.mindhub.homeBanking.services.AccountService;
 import com.mindhub.homeBanking.services.ClientService;
 import com.mindhub.homeBanking.services.TransactionService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -108,6 +109,26 @@ public class TransactionController {
         AccountDTO accountDTO= new AccountDTO(sourceAccount);
 
         return new ResponseEntity<>(accountDTO.getId(), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/transactions/exportPdf")
+    public void exportPDF(@RequestParam Long id, @RequestParam String dateFrom, @RequestParam String dateUntil, HttpServletResponse response) throws DocumentException, IOException {
+
+        LocalDateTime dateF = LocalDateTime.parse(dateFrom);
+        LocalDateTime dateU = LocalDateTime.parse(dateUntil);
+        response.setContentType("application/pdf");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormat.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey,headerValue);
+
+        List<Transaction> transactionList = transactionService.findByAccount_idAndDateBetweenOrderByDateDesc(id,dateF, dateU);
+
+        PDFExporter exporter= new PDFExporter(transactionList);
+        exporter.export(response);
+
     }
 
 }

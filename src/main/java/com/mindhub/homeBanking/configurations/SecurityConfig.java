@@ -42,7 +42,7 @@ public class SecurityConfig{
                                 "/api/clients/current/cards", "/api/loans").hasAuthority("CLIENT")
                         .requestMatchers(HttpMethod.POST,"/api/clients/current/cards",
                                 "/api/clients/current/accounts", "/api/transactions",
-                                "/api/loans", "/api/loans/pay").hasAuthority("CLIENT")
+                                "/api/loans", "/api/loans/pay", "/api/transactions/exportPdf").hasAuthority("CLIENT")
                         .requestMatchers(HttpMethod.PATCH, "/api/clients/current/cards/deactivate",
                                 "/api/clients/current/accounts/deactivate").hasAuthority("CLIENT")
                         .requestMatchers(HttpMethod.POST,"/api/loans/create").hasAuthority("ADMIN")

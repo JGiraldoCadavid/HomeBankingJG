@@ -7,7 +7,9 @@ const { createApp } = Vue
         account:{},
         parameter:null,
         idAccount:0,
-        isAccountPage:true
+        isAccountPage:true,
+          from: "",
+          until:"",
       }
     },
     created(){
@@ -79,5 +81,33 @@ const { createApp } = Vue
         })
       })
      },
+        exportPDF(){
+          if(this.from && this.until){
+              axios.post(`/api/transactions/exportPdf?id=${this.idAccount}&dateFrom=${this.from}T00:00&dateUntil=${this.until}T23:59`,
+                  null,
+                  {
+                      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                      responseType: 'blob'
+                  }
+              ).then(response => {
+                let fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                let fileLink = document.createElement('a');
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', `Statement-Account_${this.account.number}_${new Date().toLocaleString()}.pdf`);
+                document.body.appendChild(fileLink);
+                fileLink.click();
+            })
+                .catch(error => console.log(error.message))
+        } else {
+            Swal.fire({
+                title: 'Please enter both dates',
+                showConfirmButton: false,
+                icon: "error",
+                showCloseButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            })
+        }
+          },
     }
   }).mount('#app')
