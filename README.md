@@ -23,6 +23,7 @@ eliminar tarjetas de débito y crédito según sus necesidades. Cada tarjeta es 
 La plataforma permite a los usuarios mantener hasta tres tarjetas de cada tipo (débito o crédito) y limita la posesión a una única tarjeta de cada tipo de color, como titanium, gold o silver.</p>
 * `Funcionalidad 6:` <p align="justify">"***Pago externo con datáfono*** - los usuarios pueden realizar pagos simulados a través de un frontend externo ([PayHomeBanking](https://github.com/JGiraldoCadavid/PayHomeBanking)), esto se lleva a cabo mediante la validación de datos del home banking. En este escenario simulado, se verifica la autenticidad de la información
 del usuario en el sistema de home banking, y posteriormente se procede a realizar una transacción simulada que implica la retirada de fondos desde una de sus cuentas.
+* `Funcionalidad 7:` <p align="justify">"***Exportar PDF de la lista de transacciones de una cuenta*** -
 
 ## Administrador
 * `Funcionalidad 1:` <p align="justify">***Crear nuevos prestamos*** - la aplicación brinda al administrador la capacidad de crear nuevos tipos de préstamos además de los tres predeterminados
